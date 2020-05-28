@@ -1,0 +1,7 @@
+version: '3'
+services:
+  apiserver:
+    build: .
+    command: ["go", "run", "main.go"]
+    ports:
+      - "8008:8080"

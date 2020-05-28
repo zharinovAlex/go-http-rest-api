@@ -1,1 +1,2 @@
 bind_address = "8008"
+log_level = "debug"

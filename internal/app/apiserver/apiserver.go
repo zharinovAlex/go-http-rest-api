@@ -45,10 +45,10 @@ func (server *APIServer) configLogger() error {
 }
 
 func (server *APIServer) configRouter() {
-	server.router.HandleFunc("/status", server.handleStatus())
+	server.router.HandleFunc("/status", server.handleStatusCheck())
 }
 
-func (server *APIServer) handleStatus() http.HandlerFunc {
+func (server *APIServer) handleStatusCheck() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "OK")
 	}

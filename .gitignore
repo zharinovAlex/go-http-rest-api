@@ -1,3 +1,5 @@
 apiserver
+!apiserver/
+!apiserver.*
 
 .idea

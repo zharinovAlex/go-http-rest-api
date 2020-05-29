@@ -12,9 +12,8 @@ var (
 	confPath string
 )
 
-// TODO: need to set ABSOLUTE path to the .toml file
 func init() {
-	flag.StringVar(&confPath, "config-path", "configs/apiserver.toml", "Path to config file")
+	flag.StringVar(&confPath, "config-path", "../../configs/apiserver.toml", "Path to config file")
 }
 
 func main() {

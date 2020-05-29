@@ -1,7 +1,8 @@
 version: '3'
 services:
-  apiserver:
+  go-http-api-server:
+    container_name: apiserver
     build: .
     command: ["go", "run", "main.go"]
     ports:
-      - "8008:8080"
+      - "8008:8008"

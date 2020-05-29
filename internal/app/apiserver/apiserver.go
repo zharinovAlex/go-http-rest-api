@@ -1,6 +1,7 @@
 package apiserver
 
 import (
+	"go-http-rest-api/internal/app/store"
 	"io"
 	"net/http"
 
@@ -12,6 +13,7 @@ type APIServer struct {
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
+	store  *store.Store
 }
 
 func New(conf *Config) *APIServer {
@@ -28,6 +30,10 @@ func (server *APIServer) Start() error {
 	}
 
 	server.configRouter()
+
+	if err := server.configStore(); err != nil {
+		return err
+	}
 
 	server.logger.Info("Starting API server")
 
@@ -46,6 +52,18 @@ func (server *APIServer) configLogger() error {
 
 func (server *APIServer) configRouter() {
 	server.router.HandleFunc("/status", server.handleStatusCheck())
+}
+
+func (server *APIServer) configStore() error {
+	store := store.New(server.config.Store)
+
+	if err := store.Open(); err != nil {
+		return err
+	}
+
+	server.store = store
+
+	return nil
 }
 
 func (server *APIServer) handleStatusCheck() http.HandlerFunc {
